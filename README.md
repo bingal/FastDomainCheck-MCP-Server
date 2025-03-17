@@ -1,6 +1,6 @@
 # FastDomainCheck MCP Server
 
-A Metoro Command Protocol (MCP) server for checking domain name registration status in bulk.
+A Model Context Protocol for checking domain name registration status in bulk.
 
 ## Features
 
