@@ -1,0 +1,18 @@
+version: 2
+project_name: FastDomainCheck-MCP-Server
+builds:
+  - id: default
+    main: ./main.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+archives:
+  - format: tar.gz
+release:
+  github:
+    owner: bingal
+    name: FastDomainCheck-MCP-Server
