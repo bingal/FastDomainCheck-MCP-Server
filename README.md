@@ -69,31 +69,16 @@ Error Response Format:
 
 #### Usage Examples
 
-1. Check single domain:
+Check multiple domains:
+> Request
 ```json
-// Request
-{
-  "domains": ["google.com"]
-}
-
-// Response
-{
-  "results": {
-    "google.com": {
-      "registered": true
-    }
-  }
-}
-```
-
-2. Check multiple domains:
-```json
-// Request
 {
   "domains": ["example.com", "test123456.com"]
 }
+```
 
-// Response
+> Response
+```json
 {
   "results": {
     "example.com": {
@@ -121,22 +106,64 @@ Error Response Format:
 3. Timeout Management: Reasonable timeouts for all network operations
 4. Detailed Error Messages: Clear error descriptions for troubleshooting
 
+## Usage
+
+### Download Binary
+
+Download the binary file from the release page.
+https://github.com/bingal/FastDomainCheck-MCP-Server/releases
+
+### For Mac/Linux
+```bash
+chmod +x FastDomainCheck-MCP-Server
+```
+
+### MCP Server Settings
+
+#### Configuring FastDomainCheck MCP in Claude Deskto
+Modify your claude-desktop-config.json file as shown below
+
+> Mac/Linux
+```json
+{
+  "mcpServers": {
+    "fastdomaincheck": {
+      "command": "/path/to/FastDomainCheck-MCP-Server",
+      "args": []
+    }
+  }
+}
+```
+
+> Windows
+```json
+{
+  "mcpServers": {
+    "fastdomaincheck": {
+      "command": "path/to/FastDomainCheck-MCP-Server.exe",
+      "args": []
+    }
+  }
+}
+```
+
 ## Development Guide
 
 ### Requirements
 
 - Go 1.16 or higher
 - Network connectivity (for WHOIS and DNS queries)
+- Dependencies:
+  - github.com/metoro-io/mcp-golang
+  - Other project-specific dependencies
+
 
 ### Build
 
 ```bash
+# Linux
 go build -o FastDomainCheck-MCP-Server
+
+# Windows
+go build -o FastDomainCheck-MCP-Server.exe
 ```
-
-### Run
-
-```bash
-chmod +x FastDomainCheck-MCP-Server
-./FastDomainCheck-MCP-Server
-``` 
