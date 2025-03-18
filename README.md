@@ -1,6 +1,15 @@
 # FastDomainCheck MCP Server
 
-A Model Context Protocol for checking domain name registration status in bulk.
+A Model Context Protocol implementation for checking domain name registration status in bulk.
+
+## Related Links
+
+- [FastDomainCheck Online Service](https://fastdomaincheck.com/) - Check domain registration status in bulk online
+- [MCP Server Documentation](https://fastdomaincheck.com/fastdomaincheck-mcp-server) - Detailed project documentation and technical specifications
+
+## Introduction
+
+FastDomainCheck MCP Server is a Model Context Protocol (MCP) server implementation that enables secure, two-way connections between AI tools (like Claude) and domain availability data. By following the open MCP standard, it ensures seamless compatibility with various AI-powered applications.
 
 ## Features
 
