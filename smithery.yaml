@@ -66,27 +66,15 @@ startCommand:
   configSchema:
     type: object
     properties:
-      command:
+      binaryPath:
         type: string
         description: Path to the FastDomainCheck-MCP-Server binary
-      timeout:
-        type: integer
-        description: Timeout in seconds for domain checks
-        default: 10
-      maxDomains:
-        type: integer
-        description: Maximum number of domains per request
-        default: 50
     required:
-      - command
+      - binaryPath
   commandFunction: |-
     (config) => ({
-      command: config.command,
-      args: [],
-      env: {
-        TIMEOUT_SECONDS: config.timeout?.toString() || "10",
-        MAX_DOMAINS: config.maxDomains?.toString() || "50"
-      }
+      command: config.binaryPath,
+      args: []
     })
 
 build:
