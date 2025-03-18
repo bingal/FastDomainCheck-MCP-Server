@@ -1,7 +1,10 @@
 # Build stage
-FROM golang:1.21-alpine AS builder
+FROM golang:1.22-alpine AS builder
 
 WORKDIR /app
+
+# Set GOPROXY for better download speed in China
+ENV GOPROXY=https://goproxy.cn,direct
 
 # Install build dependencies
 RUN apk add --no-cache git
@@ -24,10 +27,10 @@ FROM alpine:latest
 WORKDIR /app
 
 # Install runtime dependencies
-RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache ca-certificates whois bind-tools
 
 # Copy binary from builder
 COPY --from=builder /app/FastDomainCheck-MCP-Server .
 
-# Run the server
+# Run the server (skip health check in container)
 CMD ["./FastDomainCheck-MCP-Server"] 

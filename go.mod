@@ -1,6 +1,6 @@
 module github.com/bingal/FastDomainCheck-MCP-Server
 
-go 1.23.4
+go 1.22
 
 require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
