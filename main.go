@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/bingal/FastDomainCheck-MCP-Server/checker"
 	"github.com/bingal/FastDomainCheck-MCP-Server/config"
@@ -30,6 +31,17 @@ func main() {
 	// Create configuration and domain checker
 	cfg := config.NewConfig()
 	domainChecker := checker.NewDomainChecker(cfg)
+
+	// Start health check server
+	go func() {
+		http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(map[string]string{"status": "healthy"})
+		})
+		if err := http.ListenAndServe(":8080", nil); err != nil {
+			log.Printf("Health check server error: %v", err)
+		}
+	}()
 
 	// Create STDIO transport server
 	server := mcp_golang.NewServer(stdio.NewStdioServerTransport())

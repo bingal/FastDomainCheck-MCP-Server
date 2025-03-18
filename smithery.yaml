@@ -1,0 +1,61 @@
+name: fastdomaincheck
+description: A Model Context Protocol implementation for checking domain name registration status in bulk
+version: 1.0.0
+author: bingal
+license: MIT
+
+# Define the service interface
+service:
+  type: mcp
+  protocol: stdio
+  command: FastDomainCheck-MCP-Server
+
+# Define the tools provided by this service
+tools:
+  - name: check_domains
+    description: Check registration status for multiple domain names
+    parameters:
+      domains:
+        type: array
+        items:
+          type: string
+        description: List of domains to check
+        maxItems: 50
+        minItems: 1
+    returns:
+      type: object
+      properties:
+        results:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              registered:
+                type: boolean
+                description: Whether the domain is registered
+
+# Define build and runtime requirements
+requirements:
+  build:
+    - go: ">=1.16"
+  runtime:
+    - whois
+    - dns
+
+# Docker configuration
+docker:
+  image: fastdomaincheck-mcp-server
+  dockerfile: Dockerfile
+  ports:
+    - 8080
+
+# Resource limits
+resources:
+  memory: 256Mi
+  cpu: 0.5
+
+# Health check configuration
+health:
+  type: http
+  port: 8080
+  path: /health 
