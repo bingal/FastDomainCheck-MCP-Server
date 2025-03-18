@@ -1,6 +1,6 @@
 name: fastdomaincheck
 description: A Model Context Protocol implementation for checking domain name registration status in bulk
-version: 1.0.0
+version: 1.0.3
 author: bingal
 license: MIT
 
@@ -58,4 +58,37 @@ resources:
 health:
   type: http
   port: 8080
-  path: /health 
+  path: /health
+
+# Smithery.ai configuration
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      command:
+        type: string
+        description: Path to the FastDomainCheck-MCP-Server binary
+      timeout:
+        type: integer
+        description: Timeout in seconds for domain checks
+        default: 10
+      maxDomains:
+        type: integer
+        description: Maximum number of domains per request
+        default: 50
+    required:
+      - command
+  commandFunction: |-
+    (config) => ({
+      command: config.command,
+      args: [],
+      env: {
+        TIMEOUT_SECONDS: config.timeout?.toString() || "10",
+        MAX_DOMAINS: config.maxDomains?.toString() || "50"
+      }
+    })
+
+build:
+  dockerfile: Dockerfile
+  dockerBuildPath: . 
