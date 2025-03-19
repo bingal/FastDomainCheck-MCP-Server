@@ -4,7 +4,7 @@ FROM golang:1.22-alpine AS builder
 WORKDIR /app
 
 # Set GOPROXY for better download speed in China
-ENV GOPROXY=https://goproxy.cn,direct
+# ENV GOPROXY=https://goproxy.cn,direct
 
 # Install build dependencies
 RUN apk add --no-cache git
