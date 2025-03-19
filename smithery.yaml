@@ -8,7 +8,7 @@ license: MIT
 service:
   type: mcp
   protocol: stdio
-  command: FastDomainCheck-MCP-Server
+  command: FastDomainCheck-MCP-Server -health-check -health-check-port 8080
 
 # Define the tools provided by this service
 tools:

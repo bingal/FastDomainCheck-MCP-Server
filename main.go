@@ -30,22 +30,23 @@ type SimpleCheckDomainsResponse struct {
 
 func main() {
 	// Parse command line flags
-	skipHealthCheck := flag.Bool("skip-health-check", false, "Skip starting the health check server")
+	enableHealthCheck := flag.Bool("health-check", false, "Enable health check server")
+	healthCheckPort := flag.Int("health-check-port", 8080, "Port for health check server")
 	flag.Parse()
 
 	// Create configuration and domain checker
 	cfg := config.NewConfig()
 	domainChecker := checker.NewDomainChecker(cfg)
 
-	// Start health check server if not skipped
-	if !*skipHealthCheck {
+	// Start health check server if enabled
+	if *enableHealthCheck {
 		go func() {
-			log.Println("Starting health check server on :8080")
+			log.Printf("Starting health check server on :%d", *healthCheckPort)
 			http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 				w.WriteHeader(http.StatusOK)
 				json.NewEncoder(w).Encode(map[string]string{"status": "healthy"})
 			})
-			if err := http.ListenAndServe(":8080", nil); err != nil {
+			if err := http.ListenAndServe(fmt.Sprintf(":%d", *healthCheckPort), nil); err != nil {
 				log.Printf("Health check server error: %v", err)
 			}
 		}()
