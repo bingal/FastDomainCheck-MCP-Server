@@ -156,6 +156,23 @@ Modify your claude-desktop-config.json file as shown below
 }
 ```
 
+## Python version
+The Python version of this project is available at [fastdomaincheck-mcp-server](https://pypi.org/project/fastdomaincheck-mcp-server/).
+
+### MCP Server Settings
+```json
+{
+  "mcpServers": {
+    "fastdomaincheck": {
+      "command": "uvx",
+      "args": [
+        "fastdomaincheck-mcp-server"
+      ]
+    }
+  }
+}
+```
+
 ## Development Guide
 
 ### Requirements
