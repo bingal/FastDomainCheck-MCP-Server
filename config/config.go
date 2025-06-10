@@ -48,6 +48,9 @@ func NewConfig() *Config {
 			"online": "whois.nic.online",
 			"store":  "whois.nic.store",
 
+			// ccTLDs
+			"ca": "whois.cira.ca",
+
 			// Chinese Regional TLDs
 			"com.cn": "whois.cnnic.cn",
 			"net.cn": "whois.cnnic.cn",
@@ -65,6 +68,7 @@ func NewConfig() *Config {
 		NotFoundPattern: map[string][]string{
 			"default": {"Domain not found", "No match for", "NOT FOUND", "No Data Found", "No entries found"},
 			"cn":      {"no matching record", "No matching record"},
+			"ca":      {"Not found"},
 			"com":     {"No match for", "NOT FOUND", "No Data Found"},
 			"net":     {"No match for", "NOT FOUND", "No Data Found"},
 		},
