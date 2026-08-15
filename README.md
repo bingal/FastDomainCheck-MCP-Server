@@ -1,3 +1,5 @@
+
+
 # FastDomainCheck MCP Server
 
 A Model Context Protocol implementation for checking domain name registration status in bulk.
@@ -129,7 +131,7 @@ chmod +x FastDomainCheck-MCP-Server
 
 ### MCP Server Settings
 
-#### Configuring FastDomainCheck MCP in Claude Deskto
+#### Configuring FastDomainCheck MCP in Claude Desktop
 Modify your claude-desktop-config.json file as shown below
 
 > Mac/Linux
